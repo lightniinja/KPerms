@@ -1,0 +1,7 @@
+defaultGroup: default
+group.default:
+  - 'bukkit.command.say'
+  - '-bukkit.command.kill'
+group.admin:
+  - 'bukkit.command.stop'
+  - '-bukkit.command.me'

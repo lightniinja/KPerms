@@ -1,0 +1,18 @@
+name: KPerms
+version: 1.0
+main: com.lightniinja.kperms.KPerms
+commands:
+  kperms:
+    description: Main KPerms command.
+    usage: /kperms
+    permission: kperms.help
+    permission-message: You do not have permission to do that!
+permissions:
+  kperms.help:
+    default: op
+  kperms.reload:
+    default: op
+  kperms.setgroup:
+    default: op
+    
+    
