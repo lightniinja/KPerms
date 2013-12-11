@@ -8,6 +8,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class Commands implements CommandExecutor {
+	
+	private KPerms plugin;
+	
+	public Commands(KPerms plugin) {
+		this.plugin = plugin;
+	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -26,7 +32,7 @@ public class Commands implements CommandExecutor {
 					}
 			 } else if(args[0].equalsIgnoreCase("reload")) {
 				 if(sender.hasPermission("kperms.reload")) {
-					 KPerms.reloadPermissions();
+					 plugin.reloadPermissions();
 					 sender.sendMessage(ChatColor.BLUE + "KPerms: " + ChatColor.WHITE + "Permissions where reloaded.");
 				 } else {
 					 displayNoPerms(sender);
@@ -41,17 +47,17 @@ public class Commands implements CommandExecutor {
 					String group = args[2];
 					if(Bukkit.getPlayerExact(player) != null) {
 						Player p = Bukkit.getPlayerExact(player);
-						for(String perm: KPerms.getGroupPermissions(KPerms.instance.getConfig().getString("player." + player))) {
+						for(String perm: plugin.getGroupPermissions(plugin.getConfig().getString("player." + player))) {
 							if(perm.startsWith("-")) {
-								p.addAttachment(KPerms.instance, perm.replace("-", ""), true);
+								p.addAttachment(plugin, perm.replace("-", ""), true);
 							} else {
-								p.addAttachment(KPerms.instance, perm, false);
+								p.addAttachment(plugin, perm, false);
 							}
 						}
-						KPerms.setGroup(p, group);
+						plugin.setGroup(p, group);
 					}
-					KPerms.instance.getConfig().set("player." + player, group);
-					KPerms.instance.saveConfig();
+					plugin.getConfig().set("player." + player, group);
+					plugin.saveConfig();
 				} else {
 					displayNoPerms(sender);
 				}

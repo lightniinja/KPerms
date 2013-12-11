@@ -8,52 +8,49 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class KPerms extends JavaPlugin {
 	
-	public static KPerms instance;
 	public void onEnable() {
-		instance = this;
 		this.saveDefaultConfig();
-		
 		// register command;
-		this.getCommand("kperms").setExecutor(new Commands());
+		getCommand("kperms").setExecutor(new Commands(this));
 		// register event;
-		getServer().getPluginManager().registerEvents(new Events(), this);
+		getServer().getPluginManager().registerEvents(new Events(this), this);
 	}
 	
-	public static void reloadPermissions() {
+	public void reloadPermissions() {
 		for(Player p: Bukkit.getOnlinePlayers()) {
-			String g = KPerms.instance.getConfig().getString("player." + p.getName());
+			String g = getConfig().getString("player." + p.getName());
 			setGroup(p, g, g);
 		}
-		KPerms.instance.getLogger().info("Permissions reloaded.");
+		getLogger().info("Permissions reloaded.");
 	}
 	
-	public static List<String> getGroupPermissions(String groupName) {
-		return KPerms.instance.getConfig().getStringList("group." + groupName);
+	public List<String> getGroupPermissions(String groupName) {
+		return getConfig().getStringList("group." + groupName);
 	}
 	
-	public static void setGroup(Player p, String g) {
+	public void setGroup(Player p, String g) {
 		for(String perm: getGroupPermissions(g)) {
 			if(perm.startsWith("-")) {
-				p.addAttachment(KPerms.instance, perm.replace("-", ""), false);
+				p.addAttachment(this, perm.replace("-", ""), false);
 				
 			} else {
-				p.addAttachment(KPerms.instance, perm, true);
+				p.addAttachment(this, perm, true);
 			}
 		}
 	}
-	public static void setGroup(Player p, String g, String og) {
+	public void setGroup(Player p, String g, String og) {
 		for(String perm: getGroupPermissions(og)) {
 			if(perm.startsWith("-")) {
-				p.addAttachment(KPerms.instance, perm.replace("-", ""), true);
+				p.addAttachment(this, perm.replace("-", ""), true);
 			} else {
-				p.addAttachment(KPerms.instance, perm, false);
+				p.addAttachment(this, perm, false);
 			}
 		}
 		for(String perm: getGroupPermissions(g)) {
 			if(perm.startsWith("-")) {
-				p.addAttachment(KPerms.instance, perm.replace("-", ""), false);
+				p.addAttachment(this, perm.replace("-", ""), false);
 			} else {
-				p.addAttachment(KPerms.instance, perm, true);
+				p.addAttachment(this, perm, true);
 			}
 		}
 	}
