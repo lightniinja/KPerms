@@ -11,18 +11,24 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class Events implements Listener {
+	
+	private KPerms plugin;
+	
+	public Events(KPerms plugin) {
+		this.plugin = plugin;
+	}
 
 	@EventHandler
 	public void onLogin(PlayerLoginEvent e) {
 		// get player group
-		String group = KPerms.instance.getConfig().getString("player." + e.getPlayer().getName());
+		String group = plugin.getConfig().getString("player." + e.getPlayer().getName());
 		if(group != null) {
-			KPerms.setGroup(e.getPlayer(), group);
+			plugin.setGroup(e.getPlayer(), group);
 		} else {
-			KPerms.setGroup(e.getPlayer(), KPerms.instance.getConfig().getString("defaultGroup"));
-			KPerms.instance.getConfig().set("player." + e.getPlayer().getName(), KPerms.instance.getConfig().getString("defaultGroup"));
+			plugin.setGroup(e.getPlayer(), plugin.getConfig().getString("defaultGroup"));
+			plugin.getConfig().set("player." + e.getPlayer().getName(), plugin.getConfig().getString("defaultGroup"));
 			try {
-				KPerms.instance.getConfig().save(new File(KPerms.instance.getDataFolder() + "\\config.yml"));
+				plugin.getConfig().save(new File(plugin.getDataFolder() + "\\config.yml"));
 			} catch (IOException e1) {}
 		}
 	}
@@ -38,7 +44,7 @@ public class Events implements Listener {
 	}
 	
 	public void onLeave(Player p) {
-		KPerms.setGroup(p, KPerms.instance.getConfig().getString("defaultGroup"), KPerms.instance.getConfig().getString("player." + p.getName()));
+		plugin.setGroup(p, plugin.getConfig().getString("defaultGroup"), plugin.getConfig().getString("player." + p.getName()));
 	}
 	
 }
