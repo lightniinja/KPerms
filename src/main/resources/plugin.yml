@@ -1,0 +1,36 @@
+name: KPerms
+version: 1.0
+author: lightniinja
+main: com.lightniinja.kperms.KPermsPlugin
+commands:
+  kperms:
+    usage: /kperms
+    description: KPerms command.
+permissions:
+  kperms.help:
+    default: op
+  kperms.reload:
+    default: op
+  kperms.user.info:
+    default: op
+  kperms.user.permission.add:
+    default: op
+  kperms.user.permission.remove:
+    default: op
+  kperms.user.group.add:
+    default: op
+  kperms.user.group.remove:
+    default: op
+  kperms.user.group.set:
+    default: op
+  kperms.group.info:
+    default: op
+  kperms.group.add:
+    default: op
+  kperms.group.remove:
+    default: op
+  kperms.group.permission.add: 
+    default: op
+  kperms.group.permission.remove:
+    default: op
+  
