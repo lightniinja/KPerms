@@ -1,0 +1,16 @@
+defaultGroup: default
+messages:
+  prefix: '&7[&aKPerms&7]'
+  no-permission: '&cYou do not have permission to execute that command.'
+  reload-complete: '&aConfig, all groups and players, and the plugin where reloaded.'
+  added-group: '&aGroup %g added to %player.'
+  removed-group: '&aGroup %g removed from %player.'
+  added-permission: '&aPermission %perm added to %player.'
+  removed-permission: '&aPermission %perm removed from %player.'
+  set-group: '&aSet group to %g for %player.'
+  unknown-command: '&cUnknown command! Try /kperms help!'
+  unsuccessful: '&cCommand was unsuccessful!'
+  group-added: '&aGroup successfully added!'
+  group-removed: '&aGroup successfully removed!'
+  gadded-permission: '&aPermission %perm added to %g.'
+  gremoved-permission: '&aPermission %perm removed from %g.'
