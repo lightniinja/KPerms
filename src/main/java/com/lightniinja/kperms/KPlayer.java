@@ -141,7 +141,7 @@ public class KPlayer {
 	public void assignPermissions() {
 		for(String s: this.getPermissions()) {
 			if(s.startsWith("-")) {
-				this.pl.getServer().getPlayerExact(this.p).addAttachment(this.pl, s.replace("-", ""), false);
+				this.pl.getServer().getPlayerExact(this.p).addAttachment(this.pl, s.replaceFirst("-", ""), false);
 			} else {
 				this.pl.getServer().getPlayerExact(this.p).addAttachment(this.pl, s, true);
 			}
