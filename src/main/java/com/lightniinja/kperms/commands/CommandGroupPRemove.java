@@ -29,6 +29,7 @@ public class CommandGroupPRemove {
 		}
 		KGroup g = new KGroup(this.group, this.pl);
 		if(g.removePermission(this.permission)) {
+			new Utilities(this.pl).refreshAllPermissions();
 			String str = this.u.format(this.m.getMessage("prefix") + " " + this.m.getMessage("gremoved-permission"));
 			str = str.replaceAll("%perm", this.permission);
 			str = str.replaceAll("%g", this.group);
